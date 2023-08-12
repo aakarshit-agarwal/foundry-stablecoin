@@ -39,7 +39,7 @@ contract DSCEngineTest is Test {
     function testGetUsdValue() public {
         uint256 ethAmount = 15e18;
         uint256 expectedEthUsdValue = 30000e18;
-        uint256 actualUsdValue = engine.getUsdValue(weth, ethAmount);
+        uint256 actualUsdValue = engine.getTokenToUsdValue(weth, ethAmount);
         assertEq(actualUsdValue, expectedEthUsdValue);
     }
 
