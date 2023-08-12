@@ -7,6 +7,7 @@ import {DeployDSC} from "../../script/DeployDSC.s.sol";
 import {DecentralizedStableCoin} from "../../src/DecentralizedStableCoin.sol";
 import {DSCEngine} from "../../src/DSCEngine.sol";
 import {HelperConfig} from "../../script/HelperConfig.s.sol";
+import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 
 contract DSCEngineTest is Test {
     DeployDSC deployer;
@@ -19,6 +20,9 @@ contract DSCEngineTest is Test {
     address weth;
     address wbtc;
     uint256 deployerKey;
+
+    address user1 = makeAddr("user1");
+    uint256 public constant AMOUNT_COLLATERAL = 10 ether;
 
     function setUp() public {
         deployer = new DeployDSC();
@@ -35,5 +39,19 @@ contract DSCEngineTest is Test {
         uint256 expectedEthUsdValue = 30000e18;
         uint256 actualUsdValue = engine.getUsdValue(weth, ethAmount);
         assertEq(actualUsdValue, expectedEthUsdValue);
+    }
+
+    ///////////////////////////
+    // Deposite Collateral Test
+    ///////////////////////////
+    function testRevertIfCollateralIsZero() public {
+        vm.startPrank(user1);
+        ERC20Mock(weth).approve(address(engine), AMOUNT_COLLATERAL);
+
+        vm.expectRevert(
+            abi.encodeWithSignature("DSCEngine__InvalidAmount(uint256)", 0)
+        );
+        engine.depositeCollateral(weth, 0);
+        vm.stopPrank();
     }
 }
