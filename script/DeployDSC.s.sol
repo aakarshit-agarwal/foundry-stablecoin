@@ -7,11 +7,14 @@ import {DecentralizedStableCoin} from "../src/DecentralizedStableCoin.sol";
 import {DSCEngine} from "../src/DSCEngine.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 
-contract DeplyDSC is Script {
+contract DeployDSC is Script {
     address[] public collateralTokens;
     address[] public priceFeeds;
 
-    function run() external returns (DecentralizedStableCoin, DSCEngine) {
+    function run()
+        external
+        returns (DecentralizedStableCoin, DSCEngine, HelperConfig)
+    {
         HelperConfig helperConfig = new HelperConfig();
         (
             address wethPriceFeed,
@@ -33,6 +36,6 @@ contract DeplyDSC is Script {
 
         dsc.transferOwnership(address(dscEngine));
         vm.stopBroadcast();
-        return (dsc, dscEngine);
+        return (dsc, dscEngine, helperConfig);
     }
 }
