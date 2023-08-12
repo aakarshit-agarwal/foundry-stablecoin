@@ -33,6 +33,27 @@ contract DSCEngineTest is Test {
         ERC20Mock(weth).mint(user1, user1_STARTING_BALANCE);
     }
 
+    ///////////////////
+    // Constructor Test
+    ///////////////////
+    address[] tokenAddress;
+    address[] priceFeedAddress;
+
+    function testDifferentLengthForTokenAndPriceFeeds_Revert() public {
+        tokenAddress.push(weth);
+        priceFeedAddress.push(wethUsdPriceFeed);
+        priceFeedAddress.push(wbtcUsdPriceFeed);
+
+        vm.expectRevert(
+            abi.encodeWithSignature(
+                "DSCEngine__InvalidLength(uint256,uint256)",
+                1,
+                2
+            )
+        );
+        new DSCEngine(tokenAddress, priceFeedAddress, address(dsc));
+    }
+
     //////////////////
     // Price Feed Test
     //////////////////

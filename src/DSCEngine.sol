@@ -74,7 +74,7 @@ contract DSCEngine is ReentrancyGuard {
     }
 
     //////////////////
-    // Functions
+    // Constructor
     //////////////////
     constructor(
         address[] memory tokenAddressed,
