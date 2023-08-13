@@ -64,6 +64,16 @@ contract DSCEngineTest is Test {
         assertEq(actualUsdValue, expectedEthUsdValue);
     }
 
+    function testGetUsdToTokenValue() public {
+        uint256 usdAmount = 100 ether;
+        uint256 expectedEthCollateral = 0.05 ether;
+        uint256 actualEthCollateralValue = engine.getUsdToTokenValue(
+            weth,
+            usdAmount
+        );
+        assertEq(actualEthCollateralValue, expectedEthCollateral);
+    }
+
     ///////////////////////////
     // Deposite Collateral Test
     ///////////////////////////
