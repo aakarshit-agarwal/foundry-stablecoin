@@ -8,7 +8,8 @@
 
 ## TODO
 
-- Deployment Script
+- ~~Deployment Script~~
+- Increase code coverage for DSCEngine
 
 ## Info
 
