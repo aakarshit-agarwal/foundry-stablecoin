@@ -10,7 +10,7 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/Ag
 /**
  * @title DSCEngine
  * @author Aakarshit Agarwal
- * @notice
+ * @notice Engine to orchestrate NFT20 tokens
  */
 contract DSCEngine is ReentrancyGuard {
     //////////////////
