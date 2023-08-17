@@ -6,6 +6,11 @@ import {Script} from "forge-std/Script.sol";
 import {MockV3Aggregator} from "../test/mocks/MockV3Aggregator.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 
+/**
+ * @title HelperConfig
+ * @author Aakarshit Agarwal
+ * @notice This contract is used to get the config for different networks including test networks.
+ */
 contract HelperConfig is Script {
     uint8 public constant DECIMALS = 8;
     int256 public constant ETH_USD_PRICE = 2000e8;
